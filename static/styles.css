@@ -1,0 +1,72 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+#pdfForm{
+  margin: 1%;
+  text-align: center;
+  width: fit-content;
+
+}
+/* #pdfinputlabel{
+  background-color: blueviolet;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 10px ;
+  border: 1px solid #000000;
+  color: #ffffff;
+} */
+#pdfFileInput{
+  background-color: #33ccff;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  /* display: none; */
+  /* flex-direction: column; */
+  border-radius: 10px ;
+  width: fit-content;
+  border: 1px solid #000000;
+}
+#convertButton{
+  background: linear-gradient(113.71deg,#33ccff 5.63%,#ff99cc 80.77%);
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  color: #faf8ed;
+  font-weight: bold;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  background-color: #faf8ed;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.drop-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width:400px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  padding: 10px;
+}
+
+.drop-message {
+  font-size: 16px;
+  color: #000000;
+  font-style: bold;
+  text-align: center;
+}
+
+#downloadButton{
+  border-radius: 10px;
+  border: 1px solid #000;
+  background: linear-gradient(113.71deg,#33ccff 5.63%,#ff99cc 80.77%);
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #faf8ed;
+}
