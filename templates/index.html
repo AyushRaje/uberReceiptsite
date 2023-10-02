@@ -1,4 +1,4 @@
-{% load staticfiles  %}
+{% load static  %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -193,7 +193,7 @@ function downloadLink(){
         {% if converted%}
         <p> 
             <div id="downloadButtonContainer">
-                <a class="link_button" href="{% staticfiles 'output.xlsx' %}" download> Download </a>
+                <a class="link_button" href="{% static 'output.xlsx' %}" download> Download </a>
             </div>
         </p>
         

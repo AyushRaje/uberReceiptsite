@@ -44,7 +44,7 @@ def convertToExcel(pdfFileObj):
       }
 
      
-      file_path = 'staticfiles/output.xlsx'
+      file_path = 'static/output.xlsx'
 
       if not os.path.exists(file_path):
         wb = openpyxl.Workbook()
