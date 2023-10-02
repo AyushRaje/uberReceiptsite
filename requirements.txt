@@ -11,3 +11,4 @@ six==1.16.0
 sqlparse==0.4.4
 tzdata==2023.3
 whitenoise==6.5.0
+XlsxWriter==3.1.6

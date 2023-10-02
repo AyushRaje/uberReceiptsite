@@ -193,7 +193,7 @@ function downloadLink(){
         {% if converted%}
         <p> 
             <div id="downloadButtonContainer">
-                <a class="link_button" href="{% static 'output.xlsx' %}" download> Download </a>
+                <a class="link_button" href="{% url 'download' %}" download> Download </a>
             </div>
         </p>
         
