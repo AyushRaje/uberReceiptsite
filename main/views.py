@@ -24,7 +24,7 @@ def convertview(request):
 def convertToExcel(pdfFileObj):
 
     # pdfFileObj = open('/content/Receipt_13Aug2023_121314.pdf', 'rb') # uber reciept
-    file_path = r"content/uber.xlsx"  # Replace with the path to your excel file
+     # Replace with the path to your excel file
     pdfReader = PyPDF2.PdfReader(pdfFileObj)
     all_data = ''
     for page in pdfReader.pages:
@@ -44,7 +44,7 @@ def convertToExcel(pdfFileObj):
       }
 
      
-      file_path = 'static/output.xlsx'
+      file_path = 'staticfiles/output.xlsx'
 
       if not os.path.exists(file_path):
         wb = openpyxl.Workbook()
