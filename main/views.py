@@ -82,16 +82,33 @@ def convertToExcel(pdfFileObj):
         'To': drive_info[5].split('|')[1].strip(),
         'Distance': drive_info[7].split('|')[0].strip()
       }
+      
+     
+      file_path = 'static/output.xlsx'
 
-      new_data=Data.objects.create()
-      new_data.Total=data_to_append['Total']
-      new_data.Date=data_to_append['Date']
-      new_data.Time=data_to_append['Time']
-      new_data.From=data_to_append['From']
-      new_data.To=data_to_append['To']
-      new_data.Distance=data_to_append['Distance']
-      new_data.save()
+      if not os.path.exists(file_path):
+        wb = openpyxl.Workbook()
+        wb.save(file_path)
+        existing_df = pd.read_excel(file_path)
+        new_df = pd.DataFrame(data_to_append, index=[0])
+
+        updated_df = pd.concat([existing_df, new_df], ignore_index=True)
+        updated_df.to_excel(file_path, index=False)
+      else :
+        existing_df = pd.read_excel(file_path)
+        new_df = pd.DataFrame(data_to_append, index=[0])
+
+        updated_df = pd.concat([existing_df, new_df], ignore_index=True)
+        updated_df.to_excel(file_path, index=False)
+      # new_data=Data.objects.create()
+      # new_data.Total=data_to_append['Total']
+      # new_data.Date=data_to_append['Date']
+      # new_data.Time=data_to_append['Time']
+      # new_data.From=data_to_append['From']
+      # new_data.To=data_to_append['To']
+      # new_data.Distance=data_to_append['Distance']
+      # new_data.save()
      
       
-    print(data_to_append)
-    return data_to_append
+    print(updated_df)
+    return updated_df
