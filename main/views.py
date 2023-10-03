@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import pandas as pd
 import PyPDF2
 import openpyxl
@@ -12,6 +12,11 @@ from django.http.response import HttpResponse
 
 from xlsxwriter.workbook import Workbook
 
+
+
+def index(request):
+  context={'converted':False}
+  return render(request,'index.html',context)
 
 def download_excel(request):
 
@@ -32,7 +37,7 @@ def download_excel(request):
     print(data)
     print(row_index)
     for objects in data:
-      for col_index,value in enumerate(objects):
+      for col_index,value in enumerate(objects[1:]):
         worksheet.write(row_index,col_index,value)
       row_index=row_index+1
     workbook.close()
@@ -40,31 +45,33 @@ def download_excel(request):
     output.seek(0)
 
     response = HttpResponse(output.read(), content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    response['Content-Disposition'] = "attachment; filename=test.xlsx"
+    response['Content-Disposition'] = "attachment; filename=output.xlsx"
 
     output.close()
 
     return response
 # Create your views here.
 @csrf_protect
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def convertview(request):
     if request.method=='GET':
-      context={'converted':False}
-      return render(request,'index.html',context)
+      context={'converted':True}
+      return redirect('index')
     
     if request.method=='POST':
-        pdf_file=request.FILES['pdfFile']
-        df=convertToExcel(pdf_file)
-        context={'output':df,'converted':True}
-        return render(request,'index.html',context)
-    
-
+          pdf_file=request.FILES['pdfFile']
+          if pdf_file:
+            df=convertToExcel(pdf_file)
+            context={'converted':True}
+            return redirect('index')
+          else:
+            return redirect('index')
+        
 
 def convertToExcel(pdfFileObj):
 
     # pdfFileObj = open('/content/Receipt_13Aug2023_121314.pdf', 'rb') # uber reciept
      # Replace with the path to your excel file
+    
     pdfReader = PyPDF2.PdfReader(pdfFileObj)
     all_data = ''
     for page in pdfReader.pages:
