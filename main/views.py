@@ -98,7 +98,8 @@ def convertToExcel(pdfFileObj):
   for i in not_working:
     if 'meters' in i:
       data_to_append['Distance'] = i.split('|')[0].strip()
-      
+    else:
+      data_to_append['Distance'] = "NA"
      
       # file_path = 'static/output.xlsx'
 
