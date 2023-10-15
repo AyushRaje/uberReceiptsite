@@ -116,14 +116,14 @@ def convertToExcel(pdfFileObj):
 
       #   updated_df = pd.concat([existing_df, new_df], ignore_index=True)
       #   updated_df.to_excel(file_path, index=False)
-      new_data=Data.objects.create()
-      new_data.Total=data_to_append['Total']
-      new_data.Date=data_to_append['Date']
-      new_data.Time=data_to_append['Time']
-      new_data.From=data_to_append['From']
-      new_data.To=data_to_append['To']
-      new_data.Distance=data_to_append['Distance']
-      new_data.save()
+    new_data=Data.objects.create()
+    new_data.Total=data_to_append['Total']
+    new_data.Date=data_to_append['Date']
+    new_data.Time=data_to_append['Time']
+    new_data.From=data_to_append['From']
+    new_data.To=data_to_append['To']
+    new_data.Distance=data_to_append['Distance']
+    new_data.save()
      
       
     print(new_data)
