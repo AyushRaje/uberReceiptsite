@@ -72,23 +72,32 @@ def convertToExcel(pdfFileObj):
     # pdfFileObj = open('/content/Receipt_13Aug2023_121314.pdf', 'rb') # uber reciept
      # Replace with the path to your excel file
     
-    pdfReader = PyPDF2.PdfReader(pdfFileObj)
-    all_data = ''
-    for page in pdfReader.pages:
-      all_data += page.extract_text()
+  pdfReader = PyPDF2.PdfReader(pdfFileObj)
+  all_data = ''
+  for i in range(len(pdfReader.pages)):
+    pageObj = pdfReader.pages[i]
+    ride_data = pageObj.extract_text()
+    all_data = all_data + ride_data
 
-      drive_info = all_data.split('\n')
-
-      
-
-      data_to_append = {
-        'Total': drive_info[14],
-        'Date': drive_info[9],
-        'Time': drive_info[1][-8:].strip(),
-        'From': drive_info[3].split('|')[1].strip(),
-        'To': drive_info[5].split('|')[1].strip(),
-        'Distance': drive_info[7].split('|')[0].strip()
-      }
+  not_working = all_data.split('\n')
+  not_working = [i for i in not_working if i!= '']
+  not_working = [i.strip() for i in not_working]
+  loc = []
+  data_to_append = { }
+  data_to_append['Date'] = not_working[1][0:7].strip()
+  data_to_append['Time'] = not_working[1][-8:].strip()
+  for i in not_working[0:10]:
+    if i[0] == '|':
+      loc.append(i.split('|')[1].strip())
+  data_to_append['From'] = loc[0]
+  data_to_append['To']= loc[1]
+  for i in range(len(not_working)):
+    if not_working[i] == 'Total' and not_working[i+1] == '₹':
+      #print(not_working[i+2])
+      data_to_append['Total'] = not_working[i+2]
+  for i in not_working:
+    if 'meters' in i:
+      data_to_append['Distance'] = i.split('|')[0].strip()
       
      
       # file_path = 'static/output.xlsx'
